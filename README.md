@@ -1,15 +1,31 @@
 # SLIMTutorial2025
 
+[![Julia](https://img.shields.io/badge/Julia-1.11.x-9558B2.svg?style=flat&logo=julia)](https://julialang.org)
+[![JupyterHub](https://img.shields.io/badge/JupyterHub-Server-brightgreen?style=flat&logo=jupyter)]()
+[![Reproducible](https://img.shields.io/badge/Reproducible-Environments-blue.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)]()
+
 **Tutorials for the 2025 ML4Seismic Meeting**
 
-This repository describes how to access, copy, and run the ML4Seismic 2025 tutorials on the shared JupyterHub server.
-Each tutorial comes with its own `Project.toml` and `Manifest.toml` to ensure full reproducibility.
+This repository explains how to access, copy, and run all ML4Seismic 2025 tutorials on the shared JupyterHub server.  
+Each tutorial comes with its own `Project.toml` and `Manifest.toml`, ensuring **fully reproducible Julia environments**.
 
 ---
 
-# 1. Getting Started (for Participants)
+## Table of Contents
 
-## A. Log in to JupyterHub
+- [1. Accessing JupyterHub](#1-accessing-jupyterhub)
+- [2. Copying Tutorials](#2-copying-tutorials)
+- [3. Julia Kernel Setup](#3-julia-kernel-setup)
+- [4. Running a Tutorial](#4-running-a-tutorial)
+- [5. Notes for Participants](#5-notes-for-participants)
+- [6. Troubleshooting](#6-troubleshooting)
+- [7. Directory Layout](#7-directory-layout)
+- [8. Contact](#8-contact)
+
+---
+
+## 1. Accessing JupyterHub
 
 Open your browser and visit:
 
@@ -17,61 +33,48 @@ Open your browser and visit:
 http://20.120.230.58/
 ```
 
-Use the credentials provided by the organizers.
-On your first login, you will be asked to set a new password.
+Use the username/password provided by the organizers.  
+Your first login will prompt you to set a new password.
 
 ---
 
-## B. Copy Tutorials to Your Home Directory
+## 2. Copying Tutorials
 
-The shared **read-only** tutorial directory is:
+All tutorials are stored in a **read-only shared directory**:
 
 ```
 /opt/ml4seismic_tutorial_2025/
 ```
 
-Copy the entire set of tutorials to your home directory:
+Make your own copy:
 
 ```bash
 cp -r /opt/ml4seismic_tutorial_2025 ~/ml4seismic_tutorial_2025
 ```
 
-### Directory Structure
-
-```
-~/ml4seismic_tutorial_2025/
-├── tutorial_1/
-│   ├── Project.toml
-│   ├── Manifest.toml
-│   └── tutorial_notebook.ipynb
-├── tutorial_2/
-│   ├── ...
-└── tutorial_N/
-```
-
-Each tutorial folder is an **independent Julia environment**.
+Work **only** inside your personal copy.
 
 ---
 
-# 2. Julia Kernel Setup in JupyterHub
+## 3. Julia Kernel Setup
 
-If the Julia kernel is not visible, run:
+If the Julia kernel is not available in Jupyter:
 
 ```bash
 julia -e 'using Pkg; Pkg.add("IJulia")'
 ```
 
-Then refresh the JupyterHub page and set:
+Then refresh JupyterHub and select:
 
 **Kernel → Change Kernel → Julia 1.11**
 
 ---
 
-# 3. Running a Tutorial
+## 4. Running a Tutorial
 
-## A. Activate the Tutorial Environment
+### 4.1 Activate the Environment
 
-Open a terminal in JupyterHub:
+In the JupyterHub terminal:
 
 ```bash
 cd ~/ml4seismic_tutorial_2025/tutorial_1
@@ -86,11 +89,7 @@ Pkg.activate(".")
 Pkg.instantiate()
 ```
 
-This installs all required packages for the selected tutorial.
-
-## B. Add Optional Packages
-
-For example:
+### 4.2 Install Optional Packages (if needed)
 
 ```julia
 Pkg.add(["Plots", "SlimOptim", "JutulDarcy"])
@@ -98,32 +97,53 @@ Pkg.add(["Plots", "SlimOptim", "JutulDarcy"])
 
 ---
 
-# 4. Notes for Participants
+## 5. Notes for Participants
 
-* **Do not modify** anything under `/opt/ml4seismic_tutorial_2025/`.
-  Work only inside your personal copy.
-* Save your work frequently—servers may restart when idle.
-* Always activate the correct environment before running a tutorial.
-* All tutorials require **Julia 1.11.x**.
-
----
-
-# 5. Troubleshooting
-
-| Issue                       | Fix                                                                   |
-| --------------------------- | --------------------------------------------------------------------- |
-| Julia kernel missing        | Run `Pkg.add("IJulia")` and refresh JupyterHub                        |
-| Permission denied           | You are editing `/opt/...` — work inside `~/ml4seismic_tutorial_2025` |
-| `Pkg.instantiate()` is slow | Ask admins to preinstall common packages in `/opt/julia_depot/`       |
-| Manifest mismatch           | Ensure you are using **Julia 1.11** and activated the correct folder  |
+- The directory `/opt/ml4seismic_tutorial_2025/` is **read-only**.
+- Save your work frequently; the JupyterHub server may restart after idle.
+- Always activate the correct environment before running any notebook.
+- All tutorials require **Julia 1.11.x**.
+- If using GPU-enabled examples, ensure you select a GPU runtime (if available).
 
 ---
 
-# 6. Contact
+## 6. Troubleshooting
 
-* **Prof. Felix J. Herrmann** — [felix.herrmann@gatech.edu](mailto:felix.herrmann@gatech.edu)
-* **Haoyun Li** — [hli853@gatech.edu](mailto:hli853@gatech.edu)
+| Issue                           | Solution |
+|--------------------------------|----------|
+| Julia kernel missing           | Install IJulia and refresh JupyterHub |
+| Permission denied              | You attempted to edit `/opt/...` → switch to `~/ml4seismic_tutorial_2025` |
+| Slow `Pkg.instantiate()`       | Ask admins to preinstall packages in `/opt/julia_depot/` |
+| Manifest warnings / mismatch   | Ensure Julia 1.11 and activate correct tutorial folder |
+| Kernel won’t start             | Restart Jupyter server (Control Panel → Stop → Start) |
 
-© 2025 SLIM Group, Georgia Tech
-Infrastructure for ML4Seismic 2025
+---
 
+## 7. Directory Layout
+
+```
+~/ml4seismic_tutorial_2025/
+├── tutorial_1/
+│   ├── Project.toml
+│   ├── Manifest.toml
+│   └── tutorial_notebook.ipynb
+├── tutorial_2/
+│   ├── Project.toml
+│   ├── Manifest.toml
+│   └── ...
+└── tutorial_N/
+```
+
+Each folder is its own Julia environment with pinned versions.
+
+---
+
+## 8. Contact
+
+**Prof. Felix J. Herrmann**  
+felix.herrmann@gatech.edu  
+
+**Haoyun Li**  
+hli853@gatech.edu  
+
+© 2025 SLIM Group, Georgia Tech — Infrastructure for ML4Seismic 2025
