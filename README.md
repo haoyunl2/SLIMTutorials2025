@@ -1,6 +1,6 @@
 # **ML4Seismic 2025**
 
-```markdown
+```
 # SLIMTutorials2025
 
 [![Python](https://img.shields.io/badge/Python-3.12+-3776AB.svg?style=flat&logo=python)](https://www.python.org/)
