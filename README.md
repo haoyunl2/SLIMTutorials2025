@@ -1,80 +1,68 @@
-# **ML4Seismic 2025**
+# **ML4Seismic 2025 Tutorials**
 
-```
-# SLIMTutorials2025
-
-[![Python](https://img.shields.io/badge/Python-3.12+-3776AB.svg?style=flat&logo=python)](https://www.python.org/)
-[![Julia](https://img.shields.io/badge/Julia-1.11+-9558B2.svg?style=flat&logo=julia)](https://julialang.org/)
-[![JupyterHub](https://img.shields.io/badge/JupyterHub-Server-brightgreen?style=flat&logo=jupyter)]()
+[![Python](https://img.shields.io/badge/Python-3.12+-3776AB.svg?style=flat\&logo=python)](https://www.python.org/)
+[![Julia](https://img.shields.io/badge/Julia-1.11+-9558B2.svg?style=flat\&logo=julia)](https://julialang.org/)
+[![JupyterHub](https://img.shields.io/badge/JupyterHub-Server-brightgreen?style=flat\&logo=jupyter)]()
 [![Reproducible](https://img.shields.io/badge/Reproducible-Environments-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)]()
 
-**Tutorials for the ML4Seismic Meeting 2025**
-
-This repository provides instructions for accessing, copying, and running all Python and Julia tutorials on the shared JupyterHub server.  
-All tutorials are fully reproducible and isolated via local environments.
+This repository provides instructions for accessing, copying, and running all Python and Julia tutorials on the shared JupyterHub server for **ML4Seismic 2025**.
+All tutorials use fully reproducible, self-contained environments.
 
 ---
 
-## Table of Contents
+## **Table of Contents**
 
-- [1. Accessing JupyterHub](#1-accessing-jupyterhub)
-- [2. Copying Tutorials](#2-copying-tutorials)
-- [3. Python Environment Setup](#3-python-environment-setup)
-- [4. Julia Environment Setup](#4-julia-environment-setup)
-- [5. Running Tutorials](#5-running-tutorials)
-- [6. Notes for Participants](#6-notes-for-participants)
-- [7. Troubleshooting](#7-troubleshooting)
-- [8. Directory Layout](#8-directory-layout)
-- [9. Contact](#9-contact)
-
----
-
-## 1. Accessing JupyterHub
-
-Open your browser and go to:
-
-```
-
-[https://slimtutorials2025.store](https://slimtutorials2025.store)
-
-```
-
-Log in using the credentials provided by the organizers.  
-Your first login will require you to set a new password.
+1. [Accessing JupyterHub](#1-accessing-jupyterhub)
+2. [Copying Tutorials](#2-copying-tutorials)
+3. [Python Environment Setup](#3-python-environment-setup)
+4. [Julia Environment Setup](#4-julia-environment-setup)
+5. [Running Tutorials](#5-running-tutorials)
+6. [Notes for Participants](#6-notes-for-participants)
+7. [Troubleshooting](#7-troubleshooting)
+8. [Directory Layout](#8-directory-layout)
+9. [Contact](#9-contact)
 
 ---
 
-## 2. Copying Tutorials
+# **1. Accessing JupyterHub**
 
-All official tutorials are stored in a **read-only shared directory**:
+Open your browser and visit:
+
+👉 **[https://slimtutorials2025.store](https://slimtutorials2025.store)**
+
+Log in using the credentials provided by the organizers.
+Your first login will require setting a new password.
+
+---
+
+# **2. Copying Tutorials**
+
+The official read-only tutorials are located at:
 
 ```
-
 /opt/ml4seismic_tutorial_2025/
+```
 
-````
-
-Make your own editable copy:
+Copy them into your home directory:
 
 ```bash
 cp -r /opt/ml4seismic_tutorial_2025 ~/ml4seismic_tutorial_2025
-````
+```
 
-Work **only** inside your personal copy.
-
----
-
-# 3. Python Environment Setup
-
-Each Python tutorial has its own `requirements.txt`.
-You may use the automated or manual method.
+You should **only modify your personal copy**.
 
 ---
 
-## 3.1 Automated Setup (Recommended)
+# **3. Python Environment Setup**
 
-Many tutorials include a `setup.sh`:
+Each Python tutorial has its own `requirements.txt` and optional `setup.sh`.
+
+---
+
+## **3.1 Automated Setup (Recommended)**
+
+If the tutorial contains a `setup.sh`:
 
 ```bash
 cd ~/ml4seismic_tutorial_2025/tutorial_1
@@ -82,17 +70,17 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-This script will:
+This will:
 
-* Create a virtual environment (`.venv`)
-* Install dependencies from `requirements.txt`
+* Create a `.venv`
+* Install dependencies
 * Register a Jupyter kernel
 
 ---
 
-## 3.2 Manual Setup
+## **3.2 Manual Setup**
 
-### Option A: pip (Standard)
+### **Option A: pip**
 
 ```bash
 cd ~/ml4seismic_tutorial_2025/tutorial_1
@@ -102,7 +90,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Option B: uv (Faster)
+### **Option B: uv (Faster)**
 
 ```bash
 cd ~/ml4seismic_tutorial_2025/tutorial_1
@@ -113,7 +101,7 @@ uv pip install -r requirements.txt
 
 ---
 
-## 3.3 Register a Jupyter Kernel
+## **3.3 Registering a Jupyter Kernel**
 
 After activating your `.venv`:
 
@@ -128,138 +116,123 @@ Then select:
 
 ---
 
-# 4. Julia Environment Setup
+# **4. Julia Environment Setup**
 
-The JupyterHub is already configured with a **shared Julia package depot**:
-
-```
-/opt/julia_depot
-```
-
-This depot contains all official packages (Jutul, JutulDarcy, GeoEnergyIO, GLMakie, etc.) preinstalled by the admins.
-Users **do not need to install these packages**.
-
-Each user also has a private Julia depot:
-
-```
-$HOME/.julia
-```
-
-The system automatically uses:
+The JupyterHub already defines:
 
 ```
 JULIA_DEPOT_PATH=/opt/julia_depot:$HOME/.julia
 ```
 
-This means:
+Meaning:
 
-* Official packages load instantly from `/opt/julia_depot` (read-only)
-* Any additional packages you install go to your personal `$HOME/.julia`
+* All official packages (Jutul, JutulDarcy, GeoEnergyIO…) live in **/opt/julia_depot**.
+* Your personal packages go into **$HOME/.julia**.
+* You do **not** need to install core packages.
 
 ---
 
-## 4.1 Using the Official Julia Tutorial Environment
+## **4.1 Using Tutorial Environments**
 
-Each Julia tutorial includes a `Project.toml`.
+Each Julia tutorial has a `Project.toml`.
 
-In the first cell of the notebook:
+Inside the notebook:
 
 ```julia
 using Pkg
-Pkg.activate(".")      # activate the tutorial environment
-Pkg.instantiate()      # installs missing packages into ~/.julia
+Pkg.activate(".")
+Pkg.instantiate()
 ```
 
-Then simply load packages:
+Then simply:
 
 ```julia
 using Jutul, JutulDarcy, GeoEnergyIO, GLMakie
 using DataFrames, CSV, JLD2, PyPlot
 ```
 
-Because the shared depot already includes these packages, this step is fast and does **not** write to system directories.
+Since everything is preinstalled in `/opt/julia_depot`, this is fast.
 
 ---
 
-## 4.2 For Contributors with Custom Environments
-
-If you have your own repository with its own `Project.toml`:
+## **4.2 For Contributors (Custom Projects)**
 
 ```julia
 using Pkg
 Pkg.activate("/home/<username>/myproject")
-Pkg.instantiate()    # installs only your project's missing packages
+Pkg.instantiate()
 ```
 
-Anything you install via:
+Custom packages installed via:
 
 ```julia
 Pkg.add("Flux")
 Pkg.add("CUDA")
 ```
 
-will be written to:
+will be stored under:
 
 ```
-$HOME/.julia
+~/.julia
 ```
 
-and will NOT affect other users or the system.
+and will not affect other users.
 
 ---
 
-# 5. Running Tutorials
+# **5. Running Tutorials**
 
-### Python
+## **Python**
 
-1. Activate virtual environment:
+1. Activate the environment:
 
    ```bash
    source .venv/bin/activate
    ```
-2. Start notebook or select the correct kernel.
-
-### Julia
-
-1. In the notebook:
-
-   ```julia
-   using Pkg
-   Pkg.activate(".")
-   ```
-2. Select the **Julia 1.11** kernel.
+2. Select kernel **Python (tutorial_1)**.
 
 ---
 
-# 6. Notes for Participants
+## **Julia**
 
-* Never modify files in `/opt/ml4seismic_tutorial_2025/` — it is read-only.
-* Use a personal copy under your home directory.
-* Python: each tutorial has its own `.venv`.
-* Julia: use `Pkg.activate(".")` inside each tutorial directory.
-* DO NOT run `Pkg.add` on the system depot — everything you need is already installed.
-* Additional packages you install go to your private depot (`~/.julia`).
+```julia
+using Pkg
+Pkg.activate(".")
+```
 
----
-
-# 7. Troubleshooting
-
-| Issue                            | Solution                                                                      |
-| -------------------------------- | ----------------------------------------------------------------------------- |
-| `Permission denied`              | You tried to write to `/opt/...` — switch to your local copy.                 |
-| Julia package installation fails | Admin packages are read-only. Use `Pkg.activate(".")` — writes to `~/.julia`. |
-| Missing Python kernel            | Re-install kernel: `python -m ipykernel install --user --name <name>`         |
-| Julia doesn't see a package      | Run `Pkg.instantiate()` inside the tutorial directory.                        |
-| Notebook stuck or kernel dead    | Restart your server (`Control Panel → Stop My Server`).                       |
-| GPU unavailable                  | Not all VM types contain GPUs; contact organizers if required.                |
+Then choose the **Julia 1.11** kernel.
 
 ---
 
-# 8. Directory Layout
+# **6. Notes for Participants**
+
+* Do **not** modify anything in `/opt/ml4seismic_tutorial_2025/`.
+* Always work inside `~/ml4seismic_tutorial_2025`.
+* Python tutorials each use **separate virtual environments**.
+* Julia uses **Pkg.activate(".")** inside each tutorial.
+* Avoid `Pkg.add` in system depot — everything required is installed.
+* Personal package installs go to `~/.julia` and are safe.
+
+---
+
+# **7. Troubleshooting**
+
+| Issue                          | Solution                                                                   |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| `Permission denied`            | You attempted to modify `/opt/...`. Use your personal copy.                |
+| Julia installation errors      | You tried to write to the shared depot; activate local project first.      |
+| Python kernel missing          | Reinstall kernel using `python -m ipykernel install --user --name <name>`. |
+| Missing Julia packages         | Run `Pkg.instantiate()` inside the tutorial directory.                     |
+| Notebook crashes / dead kernel | Control Panel → **Stop My Server** → Restart.                              |
+| GPU not visible                | The VM may not support GPUs — contact organizers.                          |
+
+---
+
+# **8. Directory Layout**
 
 ```
-/opt/ml4seismic_tutorial_2025/     # read-only official copy
-~/ml4seismic_tutorial_2025/        # your editable copy
+/opt/ml4seismic_tutorial_2025/      # Official, read-only
+~/ml4seismic_tutorial_2025/         # User’s working copy
     ├── python_tutorial_1/
     │   ├── requirements.txt
     │   ├── setup.sh
@@ -267,21 +240,19 @@ and will NOT affect other users or the system.
     │   └── notebook.ipynb
     ├── julia_tutorial_1/
     │   ├── Project.toml
-    │   ├── Manifest.toml  (optional)
+    │   ├── Manifest.toml
     │   └── notebook.ipynb
     └── ...
 ```
 
 ---
 
-# 9. Contact
+# **9. Contact**
 
 **Prof. Felix J. Herrmann**
-[felix.herrmann@gatech.edu](mailto:felix.herrmann@gatech.edu)
+📧 [felix.herrmann@gatech.edu](mailto:felix.herrmann@gatech.edu)
 
 **Haoyun Li**
-[hli853@gatech.edu](mailto:hli853@gatech.edu)
+📧 [hli853@gatech.edu](mailto:hli853@gatech.edu)
 
 © 2025 SLIM Group, Georgia Tech — Infrastructure for ML4Seismic 2025
-
-````
