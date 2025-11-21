@@ -30,7 +30,7 @@ Each tutorial comes with its own `Project.toml` and `Manifest.toml`, ensuring **
 Open your browser and visit:
 
 ```
-http://20.120.230.58/
+http://128.85.36.226/
 ```
 
 Use the username/password provided by the organizers.  
